@@ -1,6 +1,6 @@
 package com.eduarroyo.todolist.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,12 +31,13 @@ public class Task {
     private boolean done;
 
     @Column(nullable=false)
-    private Timestamp creationDate;
+    private Date creationDate;
 
     @Column(nullable=true)
-    private Timestamp doneDate;
+    private Date doneDate;
 
     public Task() {
+        creationDate = new Date();
     }
 
     public Task(String description) {
@@ -85,19 +86,19 @@ public class Task {
         this.done = done;
     }
 
-    public Timestamp getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Timestamp creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Timestamp getDoneDate() {
+    public Date getDoneDate() {
         return doneDate;
     }
 
-    public void setDoneDate(Timestamp doneDate) {
+    public void setDoneDate(Date doneDate) {
         this.doneDate = doneDate;
     }   
 }
