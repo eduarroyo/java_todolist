@@ -24,6 +24,9 @@ public class Task {
     @JoinColumn(name="taskListId")
     private TaskList list;
 
+    @Column(name="taskListId", insertable=false, updatable = false)
+    private Long taskListId;
+
     @Column(length=1024, nullable=false)
     private String description;
 
@@ -100,5 +103,13 @@ public class Task {
 
     public void setDoneDate(Date doneDate) {
         this.doneDate = doneDate;
+    }   
+
+    public Long getTaskListId() {
+        return taskListId;
+    }
+
+    public void setTaskListId(Long taskListId) {
+        this.taskListId = taskListId;
     }   
 }

@@ -22,6 +22,9 @@ public class TaskList {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long taskListId;
 
+    @Column(name="ownerId", insertable=false, updatable = false)
+    private long ownerId;
+
     @Column(length=256, nullable=false)
     private String title;
 
@@ -51,6 +54,14 @@ public class TaskList {
         this.owner = owner;
     }
 
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
+    }
+    
     public String getTitle() {
         return title;
     }
