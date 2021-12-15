@@ -1,6 +1,7 @@
 package com.eduarroyo.todolist.entity;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,16 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name="users")
-public class User implements Serializable {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long userId;
 
     @Column(length=100, unique=true, nullable=false)
-    private String login;
+    private String userName;
 
     @Column(length=1024, nullable=false)
     private String password;
@@ -60,6 +64,21 @@ public class User implements Serializable {
         return true;
     }
 
+    public User() {
+        this.enabled=true;
+    }
+
+    public User(String userName) {
+        this();
+        this.userName = userName;
+    }
+
+    public User(String userName, String password, ArrayList grantList) {
+        this.userName=userName;
+        this.password=password;
+
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -68,12 +87,9 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    @Override
+    public String getUsername() {
+        return userName;
     }
 
     public String getPassword() {
@@ -84,7 +100,8 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Boolean getEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -114,5 +131,29 @@ public class User implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
