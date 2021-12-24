@@ -9,8 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+// import javax.persistence.JoinColumn;
+// import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,8 +22,8 @@ public class TaskList {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long taskListId;
 
-    @Column(name="ownerId", insertable=false, updatable = false)
-    private long ownerId;
+    // @Column(name="ownerId", insertable=false, updatable = false)
+    // private long ownerId;
 
     @Column(length=256, nullable=false)
     private String title;
@@ -40,27 +40,27 @@ public class TaskList {
     @OneToMany(mappedBy="list", fetch=FetchType.EAGER)
     private List<Task> tasks;
 
-    @ManyToOne(fetch=FetchType.EAGER, optional=false)
-    @JoinColumn(name="ownerId")
-    private User owner;
+    // @ManyToOne(fetch=FetchType.EAGER, optional=false)
+    // @JoinColumn(name="ownerId")
+    // private User owner;
 
     public TaskList() {
         this.creationDate = new Date();
     }
 
-    public TaskList(String title, User owner) {
+    public TaskList(String title/*, User owner*/) {
         this();
         this.title = title;
-        this.owner = owner;
+        //this.owner = owner;
     }
 
-    public Long getOwnerId() {
-        return ownerId;
-    }
+    // public Long getOwnerId() {
+    //     return ownerId;
+    // }
 
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
+    // public void setOwnerId(Long ownerId) {
+    //     this.ownerId = ownerId;
+    // }
     
     public String getTitle() {
         return title;
@@ -86,13 +86,13 @@ public class TaskList {
         return archivedDate;
     }
 
-    public User getOwner() {
-        return owner;
-    }
+    // public User getOwner() {
+    //     return owner;
+    // }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
+    // public void setOwner(User owner) {
+    //     this.owner = owner;
+    // }
 
     @Override
     public int hashCode() {
@@ -114,7 +114,5 @@ public class TaskList {
         if (taskListId != other.taskListId)
             return false;
         return true;
-    }
-
-    
+    }    
 }
