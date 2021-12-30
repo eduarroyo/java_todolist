@@ -3,6 +3,8 @@ package com.eduarroyo.todolist.service;
 import java.util.Optional;
 
 import com.eduarroyo.todolist.entity.TaskList;
+import com.eduarroyo.todolist.exceptions.EntityNotFoundException;
+import com.eduarroyo.todolist.exceptions.TodoListException;
 import com.eduarroyo.todolist.repository.TaskListRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +89,35 @@ public class TaskListServiceImpl implements TaskListService {
     @Transactional
     public void deleteById(Long taskListId) {
         rep.deleteById(taskListId);
+    }
+
+    @Transactional
+    public TaskList archive(Long taskListId) throws EntityNotFoundException {
+        Optional<TaskList> otl = rep.findById(taskListId);
+        if(otl.isEmpty()) {
+            throw new EntityNotFoundException(TaskList.EntityName, taskListId.toString());
+        }
+        return archive(otl.get());
+    }
+
+    @Transactional
+    public TaskList archive(TaskList taskList) {
+        taskList.setArchived(true);
+        return rep.save(taskList);
+    }
+
+    @Transactional
+    public TaskList unarchive(Long taskListId) throws EntityNotFoundException {
+        Optional<TaskList> otl = rep.findById(taskListId);
+        if(otl.isEmpty()) {
+            throw new EntityNotFoundException(TaskList.EntityName, taskListId.toString());
+        }
+        return unarchive(otl.get());
+    }
+
+    @Transactional
+    public TaskList unarchive(TaskList taskList) {
+        taskList.setArchived(false);
+        return rep.save(taskList);
     }
 }

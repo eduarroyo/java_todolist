@@ -3,6 +3,7 @@ package com.eduarroyo.todolist.service;
 import java.util.Optional;
 
 import com.eduarroyo.todolist.entity.TaskList;
+import com.eduarroyo.todolist.exceptions.EntityNotFoundException;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,8 @@ public interface TaskListService {
     public Optional<TaskList> findById(Long taskListId);
     public TaskList save(TaskList taskList);
     public void deleteById(Long taskListId);
+    public TaskList archive(Long taskListId) throws EntityNotFoundException;
+    public TaskList archive(TaskList taskList);
+    public TaskList unarchive(Long taskListId) throws EntityNotFoundException;
+    public TaskList unarchive(TaskList taskList);
 }

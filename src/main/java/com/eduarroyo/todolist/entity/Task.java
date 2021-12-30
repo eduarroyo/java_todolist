@@ -15,6 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tasks")
 public class Task {
+
+    public static final String EntityName = "tarea";
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

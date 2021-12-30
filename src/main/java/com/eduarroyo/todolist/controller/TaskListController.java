@@ -5,7 +5,6 @@ import java.util.Optional;
 import com.eduarroyo.todolist.entity.TaskList;
 import com.eduarroyo.todolist.service.TaskListService;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

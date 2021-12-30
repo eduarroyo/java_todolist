@@ -18,6 +18,8 @@ import javax.persistence.Table;
 @Table(name="task_lists")
 public class TaskList {
     
+    public static final String EntityName = "lista de tareas";
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long taskListId;
